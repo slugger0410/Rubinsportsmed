@@ -147,7 +147,7 @@
 
   function showGreeting() {
     if (messagesEl.children.length === 0) {
-      addMessage('bot', "Hi! 👋 I'm the virtual assistant for Dr. Rubin's sports medicine practice in Naples. I can help with hours, location, services, insurance, and appointments. What can I help you with?");
+     addMessage('bot', "Hi! 👋 Welcome to Dr. Rubin's sports medicine clinic at OrthoCollier.\n\nWe specialize in the non-surgical advantage, combining advanced diagnostics, targeted treatments, and personalized care to help you recover and stay active.\n\nHow can I help you today?");
     }
   }
 
