@@ -22,7 +22,7 @@
       cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
       display: flex; align-items: center; justify-content: center; gap: 10px;
       transition: background 0.2s, transform 0.2s;
-      font-size: 14px; font-weight: bold; white-space: nowrap;
+      font-size: 14px; font-weight: bold; white-space: normal; text-align: center; line-height: 1.4;
     }
     #rubin-chat-toggle:hover { background: ${COLORS.primaryDark}; transform: scale(1.07); }
     #rubin-chat-window {
@@ -107,7 +107,7 @@
   const wrapper = document.createElement('div');
   wrapper.id = 'rubin-chat-widget';
   wrapper.innerHTML = `
-    <button id="rubin-chat-toggle" aria-label="Chat with us">💬 Hi! I'm Dr. Rubin's Assistant</button>
+    <button id="rubin-chat-toggle" aria-label="Chat with us">💬 Hi! I'm Dr. Rubin's Assistant<br>Ask me a question!</button>
     <div id="rubin-chat-window" class="hidden">
       <div id="rubin-chat-header">
         <div class="avatar" style="display:none"></div>
