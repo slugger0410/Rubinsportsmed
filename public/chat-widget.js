@@ -2,8 +2,8 @@
   const CHAT_API_URL = 'https://rubinsportsmed.vercel.app/api/chat';
 
   const COLORS = {
-    primary: '#1B2A4A',
-    primaryDark: '#5B8DB8',
+    primary: '#5B8DB8',
+    primaryDark: '#4A7AA3',
     white: '#ffffff',
     lightGray: '#f4f4f4',
     midGray: '#e0e0e0',
@@ -45,8 +45,8 @@
       font-size: 18px; flex-shrink: 0;
     }
     #rubin-chat-header .info { flex: 1; }
-    #rubin-chat-header .info .name { font-weight: bold; font-size: 15px; }
-    #rubin-chat-header .info .sub { font-size: 11px; opacity: 0.8; margin-top: 1px; }
+    #rubin-chat-header .info .name { font-weight: bold; font-size: 15px; font-family: 'Trebuchet MS', sans-serif; letter-spacing: 0.5px; }
+    #rubin-chat-header .info .sub { font-size: 11px; opacity: 0.8; margin-top: 1px; font-family: 'Trebuchet MS', sans-serif; }
     #rubin-chat-close {
       background: none; border: none; color: white; cursor: pointer;
       font-size: 20px; padding: 0; opacity: 0.8; line-height: 1;
@@ -110,10 +110,10 @@
     <button id="rubin-chat-toggle" aria-label="Chat with us">💬 Hi! I'm Dr. Rubin's Assistant</button>
     <div id="rubin-chat-window" class="hidden">
       <div id="rubin-chat-header">
-        <div class="avatar">🏥</div>
+        <div class="avatar" style="display:none"></div>
         <div class="info">
           <div class="name">Dr. Rubin's Office</div>
-          <div class="sub">Naples Sports Medicine · Ask us anything</div>
+          <div class="sub">OrthoCollier Sports Medicine</div>
         </div>
         <button id="rubin-chat-close" aria-label="Close">✕</button>
       </div>
