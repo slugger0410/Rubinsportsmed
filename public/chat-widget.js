@@ -138,12 +138,13 @@
   let isOpen = false;
 
   function addMessage(role, text) {
-    const div = document.createElement('div');
-    div.className = 'rubin-msg ' + role;
-    div.textContent = text;
-    messagesEl.appendChild(div);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-    return div;
+    const div = document.createElement('div')
+    div.className = 'rubin-msg ' + role
+    div.style.whiteSpace = 'pre-wrap'
+    div.textContent = text
+    messagesEl.appendChild(div)
+    messagesEl.scrollTop = messagesEl.scrollHeight
+    return div
   }
 
   function showGreeting() {
