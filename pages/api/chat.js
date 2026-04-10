@@ -211,6 +211,33 @@ Walk-ins welcome at both locations. No appointment needed!
 Call us at 239-325-1135 or visit rubinsportsmed.com to request an appointment.
 `
 
+const rateLimitMap = new Map()
+
+function rateLimit(ip) {
+  const now = Date.now()
+  const windowMs = 60 * 1000 // 1 minute window
+  const maxRequests = 15 // max 15 messages per minute per IP
+
+  if (!rateLimitMap.has(ip)) {
+    rateLimitMap.set(ip, { count: 1, start: now })
+    return false
+  }
+
+  const data = rateLimitMap.get(ip)
+
+  if (now - data.start > windowMs) {
+    rateLimitMap.set(ip, { count: 1, start: now })
+    return false
+  }
+
+  if (data.count >= maxRequests) {
+    return true
+  }
+
+  data.count++
+  return false
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
@@ -222,6 +249,11 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
+  }
+
+  const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.socket?.remoteAddress || 'unknown'
+  if (rateLimit(ip)) {
+    return res.status(429).json({ error: 'Too many requests. Please wait a moment before asking another question.' })
   }
 
   const { messages } = req.body
