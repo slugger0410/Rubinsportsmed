@@ -14,14 +14,15 @@
 
   const css = `
     #rubin-chat-widget * { box-sizing: border-box; font-family: 'Georgia', serif; }
-    #rubin-chat-toggle {
+   #rubin-chat-toggle {
       position: fixed; bottom: 24px; right: 24px; z-index: 99999;
-      width: 60px; height: 60px; border-radius: 50%;
+      height: 54px; border-radius: 30px;
+      padding: 0 20px 0 16px;
       background: ${COLORS.primary}; color: white; border: none;
       cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-      display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
       transition: background 0.2s, transform 0.2s;
-      font-size: 26px;
+      font-size: 14px; font-weight: bold; white-space: nowrap;
     }
     #rubin-chat-toggle:hover { background: ${COLORS.primaryDark}; transform: scale(1.07); }
     #rubin-chat-window {
@@ -106,7 +107,7 @@
   const wrapper = document.createElement('div');
   wrapper.id = 'rubin-chat-widget';
   wrapper.innerHTML = `
-    <button id="rubin-chat-toggle" aria-label="Chat with us">💬</button>
+    <button id="rubin-chat-toggle" aria-label="Chat with us">💬 Hi! I'm Dr. Rubin's Assistant</button>
     <div id="rubin-chat-window" class="hidden">
       <div id="rubin-chat-header">
         <div class="avatar">🏥</div>
