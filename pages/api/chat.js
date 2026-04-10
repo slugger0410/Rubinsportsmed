@@ -21,7 +21,7 @@ LOCATIONS & HOURS:
 Location 1 (Mon/Tue/Wed/Fri):
 - OrthoCollier — X-ray available
 - 1250 Pine Ridge Rd, Suite 202, Naples, FL 34108
-- Hours: Monday, Tuesday, Wednesday, Friday — 8:00 AM to 3:00 PM
+- Hours: Monday, Tuesday, Wednesday, Friday — 8:00 AM to 4:00 PM
 
 Location 2 (Thursday only):
 - OrthoCollier Fast Care — X-ray available
@@ -198,8 +198,19 @@ IMPORTANT RULES:
 - For any medical question say: "That's a great question for Dr. Rubin — call us at 239-325-1135 or request an appointment online."
 - Always be warm, brief, and helpful
 - If unsure, direct them to call the office
-- FORMATTING: Never use markdown. No asterisks, no bold, no bullet dashes, no hashtags. Write in plain conversational text only. Use line breaks to separate information.
-`
+- FORMATTING: Never use markdown. No asterisks, no bold, no bullet dashes, no hashtags. Write in plain conversational text only.
+- When sharing hours or locations, use short separate lines with line breaks between each section like this:
+
+Monday / Tuesday / Wednesday / Friday
+1250 Pine Ridge Rd, Suite 202, Naples FL
+8:00 AM – 3:00 PM
+
+Thursday
+7273 Vanderbilt Beach Rd, Suite 33, Naples FL
+9:00 AM – 7:00 PM
+
+Walk-ins welcome at both locations. No appointment needed!
+Call us at 239-325-1135 or visit rubinsportsmed.com to request an appointment.
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
