@@ -198,6 +198,7 @@ IMPORTANT RULES:
 - For any medical question say: "That's a great question for Dr. Rubin — call us at 239-325-1135 or request an appointment online."
 - Always be warm, brief, and helpful
 - If unsure, direct them to call the office
+- FORMATTING: Never use markdown. No asterisks, no bold, no bullet dashes, no hashtags. Write in plain conversational text only. Use line breaks to separate information.
 `
 
 export default async function handler(req, res) {
