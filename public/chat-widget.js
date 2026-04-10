@@ -2,8 +2,8 @@
   const CHAT_API_URL = 'https://rubinsportsmed.vercel.app/api/chat';
 
   const COLORS = {
-    primary: '#8B1A1A',
-    primaryDark: '#6B1414',
+    primary: '#1B2A4A',
+    primaryDark: '#5B8DB8',
     white: '#ffffff',
     lightGray: '#f4f4f4',
     midGray: '#e0e0e0',
