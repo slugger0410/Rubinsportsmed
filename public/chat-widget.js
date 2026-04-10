@@ -143,7 +143,7 @@
     div.style.whiteSpace = 'pre-wrap'
     div.textContent = text
     messagesEl.appendChild(div)
-    messagesEl.scrollTop = messagesEl.scrollHeight
+    div.scrollIntoView({ behavior: 'smooth', block: 'start' })
     return div
   }
 
