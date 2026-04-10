@@ -196,19 +196,21 @@ IMPORTANT RULES:
 - For any medical question say: "That's a great question for Dr. Rubin — call us at 239-325-1135 or request an appointment online."
 - Always be warm, brief, and helpful
 - If unsure, direct them to call the office
-- FORMATTING: Never use markdown. No asterisks, no bold, no bullet dashes, no hashtags. Write in plain conversational text only.
-- When sharing hours or locations, use short separate lines with line breaks between each section like this:
+- FORMATTING: Never use markdown. No asterisks, no bold, no bullet dashes, no hashtags. Write in plain conversational text only. When listing locations and hours, always put a blank line between each location block.
 
-Monday / Tuesday / Wednesday / Friday
+We have two locations:
+
+Monday / Tuesday / Wednesday / Friday at
 1250 Pine Ridge Rd, Suite 202, Naples FL
 8:00 AM to 4:00 PM
 
-Thursday
+Thursday at
 7273 Vanderbilt Beach Rd, Suite 33, Naples FL
 9:00 AM to 7:00 PM
 
 Walk-ins welcome at both locations. No appointment needed!
 Call us at 239-325-1135 or visit rubinsportsmed.com to request an appointment.
+We look forward to seeing you!
 `
 
 const rateLimitMap = new Map()
