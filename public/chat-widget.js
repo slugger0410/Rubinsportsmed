@@ -168,11 +168,23 @@
   win.classList.remove('hidden');
   showGreeting();
 
-  document.getElementById('rubin-font-increase').addEventListener('click', () => {
-    if (fontSize < maxFont) { fontSize += 2; messagesEl.style.fontSize = fontSize + 'px'; }
+  const fontIncreaseBtn = document.getElementById('rubin-font-increase');
+  const fontDecreaseBtn = document.getElementById('rubin-font-decrease');
+
+  fontIncreaseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (fontSize < maxFont) {
+      fontSize += 2;
+      Array.from(messagesEl.children).forEach(el => el.style.fontSize = fontSize + 'px');
+    }
   });
-  document.getElementById('rubin-font-decrease').addEventListener('click', () => {
-    if (fontSize > minFont) { fontSize -= 2; messagesEl.style.fontSize = fontSize + 'px'; }
+
+  fontDecreaseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (fontSize > minFont) {
+      fontSize -= 2;
+      Array.from(messagesEl.children).forEach(el => el.style.fontSize = fontSize + 'px');
+    }
   });
 
   toggle.addEventListener('click', () => {
