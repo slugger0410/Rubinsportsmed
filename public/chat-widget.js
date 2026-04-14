@@ -52,6 +52,12 @@
       font-size: 20px; padding: 0; opacity: 0.8; line-height: 1;
     }
     #rubin-chat-close:hover { opacity: 1; }
+    #rubin-font-decrease, #rubin-font-increase {
+      background: rgba(255,255,255,0.2); border: none; color: white;
+      border-radius: 4px; cursor: pointer; padding: 2px 7px;
+      font-size: 12px; font-weight: bold; margin-right: 4px;
+    }
+    #rubin-font-decrease:hover, #rubin-font-increase:hover { background: rgba(255,255,255,0.35); }
     #rubin-chat-messages {
       flex: 1; overflow-y: auto; padding: 16px;
       display: flex; flex-direction: column; gap: 10px;
@@ -115,6 +121,8 @@
           <div class="name">Dr. Rubin's Office</div>
           <div class="sub">OrthoCollier Sports Medicine</div>
         </div>
+        <button id="rubin-font-decrease" title="Decrease font">A-</button>
+        <button id="rubin-font-increase" title="Increase font">A+</button>
         <button id="rubin-chat-close" aria-label="Close">✕</button>
       </div>
       <div id="rubin-chat-messages"></div>
@@ -135,7 +143,10 @@
   const sendBtn = document.getElementById('rubin-chat-send');
 
   let messages = [];
-  let isOpen = false;
+  let isOpen = true;
+  let fontSize = 14;
+  const minFont = 12;
+  const maxFont = 20;
 
   function addMessage(role, text) {
     const div = document.createElement('div')
@@ -152,6 +163,16 @@
      addMessage('bot', "Hi! 👋 Welcome to Dr. Rubin's sports medicine clinic at OrthoCollier.\n\nWe specialize in the non-surgical advantage, combining advanced diagnostics, targeted treatments, and personalized care to help you recover and stay active.\n\nHow can I help you today?");
     }
   }
+
+  win.classList.remove('hidden');
+  showGreeting();
+
+  document.getElementById('rubin-font-increase').addEventListener('click', () => {
+    if (fontSize < maxFont) { fontSize += 2; messagesEl.style.fontSize = fontSize + 'px'; }
+  });
+  document.getElementById('rubin-font-decrease').addEventListener('click', () => {
+    if (fontSize > minFont) { fontSize -= 2; messagesEl.style.fontSize = fontSize + 'px'; }
+  });
 
   toggle.addEventListener('click', () => {
     isOpen = !isOpen;
