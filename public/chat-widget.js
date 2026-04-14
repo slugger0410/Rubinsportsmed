@@ -46,7 +46,7 @@
     }
     #rubin-chat-header .info { flex: 1; }
     #rubin-chat-header .info .name { font-weight: bold; font-size: 15px; font-family: 'Trebuchet MS', sans-serif; letter-spacing: 0.5px; }
-    #rubin-chat-header .info .sub { font-size: 11px; opacity: 0.8; margin-top: 1px; font-family: 'Trebuchet MS', sans-serif; }
+    #rubin-chat-header .info .sub { font-size: 13px; opacity: 0.9; margin-top: 1px; font-family: 'Trebuchet MS', sans-serif; }
     #rubin-chat-close {
       background: none; border: none; color: white; cursor: pointer;
       font-size: 20px; padding: 0; opacity: 0.8; line-height: 1;
@@ -152,6 +152,7 @@
     const div = document.createElement('div')
     div.className = 'rubin-msg ' + role
     div.style.whiteSpace = 'pre-wrap'
+    div.style.fontSize = fontSize + 'px'
     div.textContent = text
     messagesEl.appendChild(div)
     div.scrollIntoView({ behavior: 'smooth', block: 'start' })
