@@ -231,6 +231,14 @@
     input.focus();
   }
 
+  document.addEventListener('click', (e) => {
+    if (isOpen && !wrapper.contains(e.target)) {
+      isOpen = false;
+      win.classList.add('hidden');
+      toggle.innerHTML = '💬 Hi! I\'m Dr. Rubin\'s Assistant<br>Ask me a question!';
+    }
+  });
+
   sendBtn.addEventListener('click', sendMessage);
   input.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
