@@ -66,7 +66,16 @@
     .rubin-msg {
       max-width: 85%; padding: 10px 13px; border-radius: 12px;
       font-size: 14px; line-height: 1.5;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      min-width: 0;
     }
+    .rubin-msg a {
+      color: ${COLORS.primaryDark};
+      text-decoration: underline;
+      overflow-wrap: anywhere;
+    }
+    .rubin-msg.user a { color: #fff; }
     .rubin-msg.bot {
       background: white; color: ${COLORS.textDark};
       align-self: flex-start;
@@ -148,14 +157,32 @@
   const minFont = 12;
   const maxFont = 20;
 
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+  }
+
+  function linkify(text) {
+    return escapeHtml(text)
+      .replace(/(https?:\/\/[^\s<]+[^\s<.,:;"')\]])/g,
+               '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/(\b239-325-1135\b)/g, '<a href="tel:+12393251135">$1</a>')
+  }
+
   function addMessage(role, text) {
     const div = document.createElement('div')
     div.className = 'rubin-msg ' + role
     div.style.whiteSpace = 'pre-wrap'
     div.style.fontSize = fontSize + 'px'
-    div.textContent = text
+    if (role.indexOf('user') !== -1 || role.indexOf('typing') !== -1) {
+      div.textContent = text
+    } else {
+      div.innerHTML = linkify(text)
+    }
     messagesEl.appendChild(div)
-    div.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    messagesEl.scrollTop = messagesEl.scrollHeight
     return div
   }
 
@@ -165,6 +192,7 @@
     }
   }
 
+  toggle.innerHTML = OPEN_LABEL;
   win.classList.remove('hidden');
   showGreeting();
 
@@ -187,17 +215,24 @@
     }
   });
 
-  toggle.addEventListener('click', () => {
-    isOpen = !isOpen;
-    win.classList.toggle('hidden', !isOpen);
-    toggle.textContent = isOpen ? '✕' : '💬';
-    if (isOpen) { showGreeting(); input.focus(); }
+  const OPEN_LABEL = '✕ Close';
+  const CLOSED_LABEL = '💬 Hi! I\'m Dr. Rubin\'s Assistant<br>Ask me a question!';
+
+  function setOpen(open) {
+    isOpen = open;
+    win.classList.toggle('hidden', !open);
+    toggle.innerHTML = open ? OPEN_LABEL : CLOSED_LABEL;
+    if (open) { showGreeting(); input.focus(); }
+  }
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(!isOpen);
   });
 
-  closeBtn.addEventListener('click', () => {
-    isOpen = false;
-    win.classList.add('hidden');
-    toggle.textContent = '💬';
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(false);
   });
 
   async function sendMessage() {
@@ -232,11 +267,7 @@
   }
 
   document.addEventListener('click', (e) => {
-    if (isOpen && !wrapper.contains(e.target)) {
-      isOpen = false;
-      win.classList.add('hidden');
-      toggle.innerHTML = '💬 Hi! I\'m Dr. Rubin\'s Assistant<br>Ask me a question!';
-    }
+    if (isOpen && !wrapper.contains(e.target)) setOpen(false);
   });
 
   sendBtn.addEventListener('click', sendMessage);
