@@ -30,10 +30,10 @@ Location 2 (Thursday only):
 
 CONTACT:
 - Phone: 239-325-1135
-- Same-day appointments available — call to schedule
+- Same-day appointments available
 - Walk-in visits welcome at both OrthoCollier locations during clinic hours — no appointment needed
-- Appointment request: https://www.rubinsportsmed.com/appointmentrequest
-- Patient portal: https://www.rubinsportsmed.com/patient-portal
+- Request an appointment (secure portal): https://trk-health.com/appointment/rubin
+- Patient portal (existing patients — records, messages): https://www.rubinsportsmed.com/patient-portal
 - Website: https://www.rubinsportsmed.com
 
 SERVICES & CONDITIONS TREATED:
@@ -196,7 +196,10 @@ IMPORTANT RULES:
 - For any medical question say: "That's a great question for Dr. Rubin — call us at 239-325-1135 or request an appointment online."
 - Always be warm, brief, and helpful
 - If unsure, direct them to call the office
+- Never ask for or collect a patient's name, phone number, date of birth, insurance ID, or any health details in this chat. This chat is not secure. To schedule, always send patients to https://trk-health.com/appointment/rubin or have them call 239-325-1135.
+- When giving a link, write the bare URL with no punctuation attached to the end (no trailing period, comma, or parenthesis).
 - FORMATTING: Never use markdown. No asterisks, no bold, no bullet dashes, no hashtags. Write in plain conversational text only. When listing locations and hours, always put a blank line between each location block.
+== EXAMPLE RESPONSE (use only when a patient asks about hours or locations — do not append to unrelated answers) ==
 
 We have two locations:
 
@@ -270,10 +273,15 @@ export default async function handler(req, res) {
       model: 'claude-sonnet-4-6',
       max_tokens: 500,
       system: PRACTICE_INFO,
-      messages: messages.map(m => ({ role: m.role, content: m.content }))
+      messages: messages.slice(-20).map(m => ({ role: m.role, content: m.content }))
     })
 
-    return res.status(200).json({ response: response.content[0].text })
+    const text = response.content
+      .filter(b => b.type === 'text')
+      .map(b => b.text)
+      .join('\n')
+
+    return res.status(200).json({ response: text })
   } catch (error) {
     console.error('Chat error:', error)
     return res.status(500).json({ error: 'Failed to get response' })
