@@ -20,33 +20,36 @@
     "Hi! 👋 I'm the online assistant for Dr. Rubin's walk-in sports medicine clinic.\n\n" +
     "Ask me about hours, walk-ins, insurance, or what we treat. For anything personal or urgent, call " + PHONE + ".";
 
+  // Matches the Naples Ortho Walk-In homepage (navy + orange)
   const C = {
-    primary: '#5B8DB8',
-    primaryDark: '#4A7AA3',
-    light: '#f4f6f8',
-    border: '#e0e4e8',
-    text: '#1a1a1a',
-    mid: '#5a6470',
+    navy: '#0f2a44',
+    navyMid: '#274057',
+    orange: '#f5a524',
+    orangeDark: '#e09412',
+    light: '#f3f6f9',
+    border: '#dde3ea',
+    text: '#0f2a44',
+    mid: '#5d6f81',
   };
 
   const css = `
-    #rubin-chat-widget, #rubin-chat-widget * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    #rubin-chat-widget * { box-sizing: border-box; font-family: inherit; } /* uses the site's own font */
     #rubin-chat-toggle {
       position: fixed; bottom: 20px; right: 20px; z-index: 99999;
       height: 52px; border-radius: 26px; padding: 0 20px 0 16px;
-      background: ${C.primary}; color: #fff; border: none; cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+      background: ${C.orange}; color: ${C.navy}; border: none; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.28);
       display: flex; align-items: center; gap: 8px;
-      font-size: 15px; font-weight: 600; transition: background .2s, transform .2s;
+      font-size: 15px; font-weight: 700; transition: background .2s, transform .2s;
     }
-    #rubin-chat-toggle:hover { background: ${C.primaryDark}; transform: translateY(-1px); }
-    #rubin-chat-toggle:focus-visible { outline: 3px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 5px ${C.primary}; }
+    #rubin-chat-toggle:hover { background: ${C.orangeDark}; transform: translateY(-1px); }
+    #rubin-chat-toggle:focus-visible { outline: 3px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 5px ${C.navy}; }
     #rubin-chat-toggle .rubin-ico { font-size: 20px; line-height: 1; }
 
     #rubin-chat-teaser {
       position: fixed; bottom: 82px; right: 20px; z-index: 99999;
       max-width: 250px; background: #fff; color: ${C.text};
-      padding: 12px 34px 12px 14px; border-radius: 14px 14px 4px 14px;
+      padding: 12px 34px 12px 14px; border-radius: 14px 14px 4px 14px; border-left: 4px solid ${C.orange};
       box-shadow: 0 6px 24px rgba(0,0,0,0.18); font-size: 14px; line-height: 1.4;
       cursor: pointer; animation: rubinPop .25s ease-out;
     }
@@ -66,17 +69,17 @@
     #rubin-chat-window.rubin-hidden { opacity: 0; pointer-events: none; transform: translateY(12px); visibility: hidden; }
 
     #rubin-chat-header {
-      background: ${C.primary}; color: #fff; padding: 12px 14px;
+      background: ${C.navy}; color: #fff; padding: 12px 14px;
       display: flex; align-items: center; gap: 8px;
     }
     #rubin-chat-header .rubin-info { flex: 1; min-width: 0; }
     #rubin-chat-header .rubin-name { font-weight: 700; font-size: 15px; }
-    #rubin-chat-header .rubin-sub { font-size: 12px; opacity: .9; margin-top: 2px; }
+    #rubin-chat-header .rubin-sub { font-size: 12px; color: ${C.orange}; margin-top: 2px; }
     #rubin-chat-header button {
-      background: rgba(255,255,255,0.18); border: none; color: #fff; cursor: pointer;
+      background: ${C.navyMid}; border: none; color: #fff; cursor: pointer;
       border-radius: 6px; padding: 4px 8px; font-size: 12px; font-weight: 700;
     }
-    #rubin-chat-header button:hover { background: rgba(255,255,255,0.32); }
+    #rubin-chat-header button:hover { background: #3a5570; }
     #rubin-chat-header #rubin-chat-close { font-size: 16px; padding: 2px 8px; }
 
     #rubin-chat-messages {
@@ -87,10 +90,10 @@
       max-width: 86%; padding: 10px 13px; border-radius: 14px; font-size: var(--rubin-fs);
       line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0;
     }
-    .rubin-msg a { color: ${C.primaryDark}; text-decoration: underline; }
+    .rubin-msg a { color: ${C.navy}; font-weight: 600; text-decoration: underline; text-decoration-color: ${C.orange}; text-underline-offset: 2px; }
     .rubin-msg.bot { background: #fff; color: ${C.text}; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .rubin-msg.user { background: ${C.primary}; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
-    .rubin-msg.user a { color: #fff; }
+    .rubin-msg.user { background: ${C.navy}; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .rubin-msg.user a { color: #fff; text-decoration-color: ${C.orange}; }
     .rubin-typing { display: inline-flex; gap: 4px; padding: 14px 16px; }
     .rubin-typing span { width: 7px; height: 7px; border-radius: 50%; background: #9aa5b1; animation: rubinDot 1.2s infinite; }
     .rubin-typing span:nth-child(2) { animation-delay: .15s; }
@@ -99,15 +102,15 @@
 
     #rubin-chat-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 14px 10px; background: ${C.light}; }
     #rubin-chat-chips button {
-      border: 1px solid ${C.primary}; background: #fff; color: ${C.primaryDark};
+      border: 1px solid ${C.navy}; background: #fff; color: ${C.navy}; font-weight: 600;
       border-radius: 16px; padding: 6px 11px; font-size: 13px; cursor: pointer;
     }
-    #rubin-chat-chips button:hover { background: ${C.primary}; color: #fff; }
+    #rubin-chat-chips button:hover { background: ${C.navy}; color: #fff; }
 
     #rubin-chat-actions { display: flex; gap: 8px; padding: 8px 12px 0; background: #fff; border-top: 1px solid ${C.border}; }
     #rubin-chat-actions a {
-      flex: 1; text-align: center; text-decoration: none; font-size: 13px; font-weight: 600;
-      padding: 7px 6px; border-radius: 8px; border: 1px solid ${C.border}; color: ${C.primaryDark};
+      flex: 1; text-align: center; text-decoration: none; font-size: 13px; font-weight: 700; white-space: nowrap;
+      padding: 7px 6px; border-radius: 8px; border: 1px solid ${C.navy}; color: ${C.navy};
     }
     #rubin-chat-actions a:hover { background: ${C.light}; }
 
@@ -117,12 +120,12 @@
       font-size: 16px; /* 16px prevents iOS zoom on focus */ outline: none; resize: none;
       min-height: 42px; max-height: 110px; line-height: 1.35;
     }
-    #rubin-chat-input:focus { border-color: ${C.primary}; }
+    #rubin-chat-input:focus { border-color: ${C.orange}; box-shadow: 0 0 0 2px rgba(245,165,36,.25); }
     #rubin-chat-send {
-      background: ${C.primary}; color: #fff; border: none; border-radius: 10px;
+      background: ${C.orange}; color: ${C.navy}; border: none; border-radius: 10px;
       width: 44px; height: 42px; cursor: pointer; font-size: 18px; flex-shrink: 0;
     }
-    #rubin-chat-send:hover { background: ${C.primaryDark}; }
+    #rubin-chat-send:hover { background: ${C.orangeDark}; }
     #rubin-chat-send:disabled { opacity: .5; cursor: default; }
     #rubin-chat-footer { text-align: center; font-size: 11px; color: #8a949e; padding: 0 0 8px; background: #fff; }
 
@@ -160,10 +163,10 @@
       <div id="rubin-chat-chips"></div>
       <div id="rubin-chat-actions">
         <a href="tel:+12393251135">📞 Call</a>
-        <a href="https://trk-health.com/appointment/rubin" target="_blank" rel="noopener noreferrer">📅 Request appointment</a>
+        <a href="https://trk-health.com/appointment/rubin" target="_blank" rel="noopener noreferrer">📅 Book appointment</a>
       </div>
       <div id="rubin-chat-input-row">
-        <textarea id="rubin-chat-input" rows="1" maxlength="${MAX_CHARS}" placeholder="Ask about hours, walk-ins, insurance…" aria-label="Type your question"></textarea>
+        <textarea id="rubin-chat-input" rows="1" maxlength="${MAX_CHARS}" placeholder="Type your question…" aria-label="Type your question"></textarea>
         <button id="rubin-chat-send" aria-label="Send">➤</button>
       </div>
       <div id="rubin-chat-footer">AI assistant · Not medical advice · Please don't share personal health info</div>
