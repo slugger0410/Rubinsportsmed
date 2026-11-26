@@ -94,6 +94,8 @@
     .rubin-msg.bot { background: #fff; color: ${C.text}; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .rubin-msg.user { background: ${C.navy}; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
     .rubin-msg.user a { color: #fff; text-decoration-color: ${C.orange}; }
+    .rubin-msg a.rubin-addr { font-size: 1.05em; font-weight: 700; text-decoration: none; border-bottom: 2px solid ${C.orange}; }
+    .rubin-msg a.rubin-addr:hover { background: #fff4df; }
     .rubin-typing { display: inline-flex; gap: 4px; padding: 14px 16px; }
     .rubin-typing span { width: 7px; height: 7px; border-radius: 50%; background: #9aa5b1; animation: rubinDot 1.2s infinite; }
     .rubin-typing span:nth-child(2) { animation-delay: .15s; }
@@ -201,7 +203,12 @@
   function linkify(text) {
     return escapeHtml(text)
       .replace(/(https?:\/\/[^\s<]+[^\s<.,:;"')\]])/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
-      .replace(/\b(?:\(?239\)?[-.\s]?)325[-.\s]?1135\b/g, '<a href="tel:+12393251135">$&</a>');
+      .replace(/\b(?:\(?239\)?[-.\s]?)325[-.\s]?1135\b/g, '<a href="tel:+12393251135">$&</a>')
+      // Make the clinic addresses tap-for-directions
+      .replace(/1250 Pine Ridge R(?:oa)?d\.?(?:,? (?:Suite|Ste\.?) 202)?/gi,
+        '<a class="rubin-addr" href="https://maps.google.com/?q=1250+Pine+Ridge+Road+Suite+202+Naples+FL+34108" target="_blank" rel="noopener noreferrer">📍 $&</a>')
+      .replace(/7273 Vanderbilt Beach R(?:oa)?d\.?(?:,? (?:Suite|Ste\.?) 33)?/gi,
+        '<a class="rubin-addr" href="https://maps.google.com/?q=7273+Vanderbilt+Beach+Rd+Suite+33+Naples+FL+34119" target="_blank" rel="noopener noreferrer">📍 $&</a>');
   }
 
   function addBubble(role, text) {
