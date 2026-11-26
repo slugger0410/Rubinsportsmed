@@ -1,16 +1,5 @@
-const nextConfig = {
-  async headers() {
-    return [
-      {
-        source: '/api/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Methods', value: 'POST, OPTIONS' },
-          { key: 'Access-Control-Allow-Headers', value: 'Content-Type' },
-        ],
-      },
-    ]
-  },
-}
+// CORS is handled inside pages/api/chat.js (restricted to rubinsportsmed.com),
+// so no wildcard headers here.
+const nextConfig = {}
 
 module.exports = nextConfig
